@@ -62,7 +62,7 @@
 #define LWIP_IPV6_MLD 0
 #define LWIP_IPV6_AUTOCONFIG 1
 
-#if __APPLE__
+#if defined __APPLE__
     #include <TargetConditionals.h>
 
     #if TARGET_OS_IPHONE
@@ -70,6 +70,18 @@
     #endif
 
     #define MEMP_NUM_TCP_PCB 256
+#elif defined __linux__
+    #include <endian.h>
+
+    // BYTE_ORDER by default is LITTLE_ENDIAN if undefined,
+    // detects only big endian here.
+    #if defined __BYTE_ORDER && defined __BIG_ENDIAN
+        #if _BYTE_ORDER == __BIG_ENDIAN
+            #define BYTE_ORDER BIG_ENDIAN
+        #endif
+    #endif
+
+    #define MEMP_NUM_TCP_PCB 1024
 #else
     #define MEMP_NUM_TCP_PCB 1024
 #endif
