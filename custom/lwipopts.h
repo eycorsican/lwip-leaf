@@ -67,9 +67,10 @@
 
     #if TARGET_OS_IPHONE
         #define LWIP_TCP_KEEPALIVE 1
+        #define MEMP_NUM_TCP_PCB 256
+    #else
+        #define MEMP_NUM_TCP_PCB 1024
     #endif
-
-    #define MEMP_NUM_TCP_PCB 256
 #elif defined __linux__
     #include <endian.h>
 
@@ -128,6 +129,7 @@
 #define TCP_OUTPUT_DEBUG LWIP_DBG_ON
 #define TCPIP_DEBUG LWIP_DBG_ON
 #define IP6_DEBUG LWIP_DBG_ON
+#define PBUF_DEBUG LWIP_DBG_ON
 
 #define LWIP_STATS 0
 #define LWIP_STATS_DISPLAY 0
