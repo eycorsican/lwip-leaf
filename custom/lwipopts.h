@@ -97,11 +97,11 @@
 #define LWIP_CHECKSUM_ON_COPY 1
 
 #define TCP_MSS 1460
-#define TCP_WND (16 * TCP_MSS)
+#define TCP_WND (32 * TCP_MSS)
 #define TCP_SND_BUF (8 * TCP_MSS)
-#define MEM_SIZE (1 * 1024 * 1024)
-#define MEMP_NUM_TCP_SEG (4 * (TCP_SND_BUF / TCP_MSS))
-#define PBUF_POOL_SIZE ((TCP_WND / TCP_MSS) + 1)
+#define MEM_SIZE (512 * 1024)
+#define MEMP_NUM_TCP_SEG 256
+#define PBUF_POOL_SIZE 512
 
 // #define TCP_MSS 1460
 // #define TCP_WND (16 * TCP_MSS)
