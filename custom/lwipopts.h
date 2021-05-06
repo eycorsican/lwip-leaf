@@ -99,7 +99,18 @@
 #define TCP_MSS 1460
 #define TCP_WND (32 * TCP_MSS)
 #define TCP_SND_BUF (8 * TCP_MSS)
-#define MEM_SIZE (512 * 1024)
+
+#if defined __APPLE__
+    #include <TargetConditionals.h>
+    #if TARGET_OS_IPHONE
+        #define MEM_SIZE (512 * 1024)
+    #else
+        #define MEM_SIZE (2 * 1024 * 1024)
+    #endif
+#else
+    #define MEM_SIZE (2 * 1024 * 1024)
+#endif
+
 #define MEMP_NUM_TCP_SEG 256
 #define PBUF_POOL_SIZE 512
 
